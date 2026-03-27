@@ -685,3 +685,419 @@ select:focus-visible { outline: 2px solid var(--ga-blue); outline-offset: 1px; }
   #content-area { max-width: 100% !important; padding: 0 !important; }
   .ga-table { font-size: 10px; }
 }
+
+/* =====================================================================
+   AvSocialOS v2 — Extended Component Styles
+   Form, validation, compliance, pipeline, calendar, QA, publishing
+   ===================================================================== */
+
+/* ---- Form Components (extended) ---- */
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+.form-actions {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+  padding-top: 16px;
+  border-top: 1px solid var(--ga-border);
+  margin-top: 20px;
+}
+.form-help {
+  font-size: 11px;
+  color: var(--ga-muted);
+  margin-top: 4px;
+}
+
+/* ---- Validation States ---- */
+.form-input.error,
+.form-select.error,
+.form-textarea.error {
+  border-color: var(--ga-red);
+  box-shadow: 0 0 0 3px rgba(232,80,58,0.12);
+}
+.form-input.success,
+.form-select.success,
+.form-textarea.success {
+  border-color: var(--ga-green);
+  box-shadow: 0 0 0 3px rgba(151,203,0,0.12);
+}
+.validation-msg {
+  font-size: 11px;
+  margin-top: 4px;
+  font-weight: 600;
+}
+.validation-error {
+  color: var(--ga-red);
+}
+.validation-success {
+  color: var(--ga-green-dark);
+}
+
+/* ---- Compliance Indicators ---- */
+.compliance-pass {
+  color: var(--ga-green-dark);
+  font-weight: 700;
+}
+.compliance-fail {
+  color: var(--ga-red);
+  font-weight: 700;
+}
+.compliance-warning {
+  color: var(--ga-amber);
+  font-weight: 700;
+}
+.compliance-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 10px;
+  border-radius: var(--ga-radius-pill);
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.compliance-chip.pass { background: rgba(151,203,0,0.12); color: var(--ga-green-dark); }
+.compliance-chip.fail { background: var(--ga-red-light); color: var(--ga-red); }
+.compliance-chip.warning { background: var(--ga-amber-light); color: #92600A; }
+
+/* ---- Readiness Checklist ---- */
+.readiness-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.readiness-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px;
+  background: var(--ga-off-white);
+  border-radius: var(--ga-radius);
+  font-size: 13px;
+  color: var(--ga-charcoal);
+}
+.readiness-check {
+  color: var(--ga-green-dark);
+  font-weight: 700;
+  flex-shrink: 0;
+}
+.readiness-fail {
+  color: var(--ga-red);
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+/* ---- Pilot-First Chip ---- */
+.pilot-first-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 10px;
+  border-radius: var(--ga-radius-pill);
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  background: rgba(151,203,0,0.15);
+  color: var(--ga-green-dark);
+}
+
+/* ---- Pipeline Drag Styles ---- */
+.pipeline-item.dragging {
+  opacity: 0.5;
+  border: 2px dashed var(--ga-blue);
+  background: var(--ga-blue-subtle);
+}
+.pipeline-stage.drag-over {
+  background: var(--ga-blue-subtle);
+  border-color: var(--ga-blue);
+  box-shadow: inset 0 0 0 2px rgba(71,130,211,0.2);
+}
+
+/* ---- Override Button ---- */
+.btn-override {
+  background: var(--ga-red);
+  color: var(--ga-white);
+  font-weight: 700;
+  border: 2px solid var(--ga-red);
+}
+.btn-override:hover {
+  background: var(--ga-amber);
+  border-color: var(--ga-amber);
+  color: var(--ga-navy);
+}
+
+/* ---- Severity Badges ---- */
+.severity-critical {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 8px;
+  border-radius: var(--ga-radius-pill);
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  background: var(--ga-red-light);
+  color: var(--ga-red);
+}
+.severity-warning {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 8px;
+  border-radius: var(--ga-radius-pill);
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  background: var(--ga-amber-light);
+  color: #92600A;
+}
+.severity-info {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 8px;
+  border-radius: var(--ga-radius-pill);
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  background: var(--ga-blue-light);
+  color: var(--ga-blue);
+}
+
+/* ---- User Picker ---- */
+.user-picker {
+  position: relative;
+  display: inline-block;
+}
+.user-picker-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 30;
+  background: var(--ga-white);
+  border: 1px solid var(--ga-border);
+  border-radius: var(--ga-radius);
+  box-shadow: var(--ga-shadow-lg);
+  min-width: 200px;
+  max-height: 240px;
+  overflow-y: auto;
+  padding: 4px 0;
+}
+.user-picker-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  font-size: 13px;
+  color: var(--ga-charcoal);
+  cursor: pointer;
+  transition: var(--ga-transition);
+}
+.user-picker-item:hover {
+  background: var(--ga-blue-subtle);
+}
+
+/* ---- Intake Form ---- */
+.intake-form {
+  max-width: 720px;
+  margin: 0 auto;
+}
+.intake-section {
+  background: var(--ga-white);
+  border: 1px solid var(--ga-border);
+  border-radius: var(--ga-radius-lg);
+  padding: 24px;
+  margin-bottom: 20px;
+  box-shadow: var(--ga-shadow-sm);
+}
+.intake-section h3 {
+  font-family: var(--ga-font-display);
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--ga-navy);
+  margin-bottom: 16px;
+}
+
+/* ---- Publishing Readiness Board ---- */
+.readiness-board {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 16px;
+}
+.readiness-column {
+  background: var(--ga-off-white);
+  border: 1px solid var(--ga-border);
+  border-radius: var(--ga-radius-lg);
+  padding: 16px;
+  min-height: 200px;
+}
+.readiness-column h4 {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--ga-muted);
+  margin-bottom: 12px;
+}
+.readiness-card {
+  background: var(--ga-white);
+  border: 1px solid var(--ga-border-light);
+  border-radius: var(--ga-radius);
+  padding: 12px;
+  margin-bottom: 8px;
+  transition: var(--ga-transition);
+}
+.readiness-card:hover {
+  box-shadow: var(--ga-shadow-sm);
+  border-color: var(--ga-blue);
+}
+
+/* ---- QA Gate ---- */
+.qa-blocked-queue {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 16px;
+  background: var(--ga-red-light);
+  border: 1px solid var(--ga-red);
+  border-radius: var(--ga-radius-lg);
+}
+.qa-violation-card {
+  background: var(--ga-white);
+  border: 1px solid var(--ga-border);
+  border-radius: var(--ga-radius);
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.qa-violation-card .violation-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--ga-navy);
+}
+.qa-violation-card .violation-detail {
+  font-size: 12px;
+  color: var(--ga-muted);
+}
+.qa-preflight {
+  background: var(--ga-white);
+  border: 1px solid var(--ga-border);
+  border-radius: var(--ga-radius-lg);
+  padding: 20px;
+  box-shadow: var(--ga-shadow-sm);
+}
+.qa-preflight h3 {
+  font-family: var(--ga-font-display);
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--ga-navy);
+  margin-bottom: 12px;
+}
+
+/* ---- Formula Gauge ---- */
+.formula-gauge {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  background: var(--ga-white);
+  border: 1px solid var(--ga-border);
+  border-radius: var(--ga-radius-lg);
+  box-shadow: var(--ga-shadow-sm);
+}
+.formula-gauge .gauge-bar {
+  flex: 1;
+  height: 10px;
+  background: var(--ga-off-white);
+  border-radius: 5px;
+  overflow: hidden;
+}
+.formula-gauge .gauge-fill {
+  height: 100%;
+  border-radius: 5px;
+  background: var(--ga-green);
+  transition: width 0.4s ease;
+}
+.formula-gauge .gauge-score {
+  font-family: var(--ga-font-display);
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--ga-navy);
+  min-width: 48px;
+  text-align: right;
+}
+
+/* ---- Calendar Views ---- */
+.calendar-month {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 2px;
+}
+.calendar-week {
+  display: grid;
+  grid-template-columns: 60px repeat(7, 1fr);
+  gap: 2px;
+}
+.calendar-day {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.calendar-cell {
+  min-height: 80px;
+  background: var(--ga-white);
+  border: 1px solid var(--ga-border-light);
+  border-radius: var(--ga-radius);
+  padding: 6px 8px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: var(--ga-transition);
+}
+.calendar-cell:hover {
+  border-color: var(--ga-blue);
+  box-shadow: var(--ga-shadow-xs);
+}
+.calendar-cell.today {
+  border-color: var(--ga-green);
+  background: rgba(151,203,0,0.04);
+}
+.calendar-event {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 6px;
+  border-radius: 3px;
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--ga-white);
+  background: var(--ga-blue);
+  margin-bottom: 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ---- Gap Alert ---- */
+.gap-alert {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 16px;
+  border-radius: var(--ga-radius);
+  font-size: 13px;
+  font-weight: 600;
+  background: var(--ga-amber-light);
+  color: #92600A;
+  border: 1px solid var(--ga-amber);
+}
+.gap-alert.critical {
+  background: var(--ga-red-light);
+  color: var(--ga-red);
+  border-color: var(--ga-red);
+}

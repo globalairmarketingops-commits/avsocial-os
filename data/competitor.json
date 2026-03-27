@@ -1,0 +1,80 @@
+[
+  {
+    "id": "comp_linkedin",
+    "platform": "linkedin",
+    "competitor_name": "Controller.com",
+    "followers": 8200,
+    "posts_per_week": 4,
+    "engagement_rate": 1.2,
+    "content_variety_score": 2,
+    "authority_gap_score": 68,
+    "notes": "Listing reposts only. No thought leadership, no authority content, no event coverage. GlobalAir.com leads on engagement quality.",
+    "last_audited": "2026-03-25",
+    "updated_at": "2026-03-25T08:00:00Z"
+  },
+  {
+    "id": "comp_facebook",
+    "platform": "facebook",
+    "competitor_name": "Controller.com",
+    "followers": 22100,
+    "posts_per_week": 8,
+    "engagement_rate": 0.8,
+    "content_variety_score": 1,
+    "authority_gap_score": 45,
+    "notes": "Auto-posted listings with no copy variation. Higher follower count but low engagement. No community management.",
+    "last_audited": "2026-03-25",
+    "updated_at": "2026-03-25T08:00:00Z"
+  },
+  {
+    "id": "comp_instagram",
+    "platform": "instagram",
+    "competitor_name": "Controller.com",
+    "followers": 1400,
+    "posts_per_week": 1,
+    "engagement_rate": 0.6,
+    "content_variety_score": 1,
+    "authority_gap_score": 82,
+    "notes": "Minimal presence. No strategy, no carousels, no hashtag optimization. Clear opportunity for GlobalAir.com dominance.",
+    "last_audited": "2026-03-25",
+    "updated_at": "2026-03-25T08:00:00Z"
+  },
+  {
+    "id": "comp_twitter",
+    "platform": "twitter",
+    "competitor_name": "Controller.com",
+    "followers": 3100,
+    "posts_per_week": 3,
+    "engagement_rate": 0.4,
+    "content_variety_score": 1,
+    "authority_gap_score": 58,
+    "notes": "Auto-posted listings only. No news commentary, no industry takes. Very low engagement.",
+    "last_audited": "2026-03-25",
+    "updated_at": "2026-03-25T08:00:00Z"
+  },
+  {
+    "id": "comp_youtube",
+    "platform": "youtube",
+    "competitor_name": "Controller.com",
+    "followers": 0,
+    "posts_per_week": 0,
+    "engagement_rate": 0,
+    "content_variety_score": 0,
+    "authority_gap_score": 100,
+    "notes": "No presence. Massive greenfield opportunity for GlobalAir.com video authority.",
+    "last_audited": "2026-03-25",
+    "updated_at": "2026-03-25T08:00:00Z"
+  },
+  {
+    "id": "comp_tiktok",
+    "platform": "tiktok",
+    "competitor_name": "Controller.com",
+    "followers": 0,
+    "posts_per_week": 0,
+    "engagement_rate": 0,
+    "content_variety_score": 0,
+    "authority_gap_score": 100,
+    "notes": "No presence. Uncontested space for AvGeek content.",
+    "last_audited": "2026-03-25",
+    "updated_at": "2026-03-25T08:00:00Z"
+  }
+]

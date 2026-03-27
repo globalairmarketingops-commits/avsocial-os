@@ -1,0 +1,25 @@
+[
+  {
+    "id": "ian_monthly_mar26",
+    "period": "monthly",
+    "posts_count": 8,
+    "engagement_rate": 6.8,
+    "impressions": 14200,
+    "comments": 18,
+    "shares": 12,
+    "growth_rate": 4.1,
+    "post_frequency": "2.3/wk",
+    "top_post": "NBAA Top 40 Reflection: Building Aviation's Next Chapter",
+    "top_post_url": null,
+    "theme_distribution": {
+      "market_intelligence": 3,
+      "broker_relationships": 2,
+      "aviation_authority": 2,
+      "nbaa_network": 1
+    },
+    "event_linkages": ["NBAA SDC", "AirVenture 2026"],
+    "derivative_clips_count": 4,
+    "authority_score": 72,
+    "updated_at": "2026-03-27T08:00:00Z"
+  }
+]

@@ -29,6 +29,7 @@
       </div>
     </div>
 
+    <!-- Command -->
     <div class="nav-group">
       <div class="nav-group-label">Command</div>
       <div class="nav-item active" data-route="dashboard" onclick="Router.navigate('dashboard')" tabindex="0" role="link">
@@ -37,6 +38,7 @@
       </div>
     </div>
 
+    <!-- Operations -->
     <div class="nav-group">
       <div class="nav-group-label">Operations</div>
       <div class="nav-item" data-route="calendar" onclick="Router.navigate('calendar')" tabindex="0" role="link">
@@ -45,14 +47,32 @@
       </div>
       <div class="nav-item" data-route="tasks" onclick="Router.navigate('tasks')" tabindex="0" role="link">
         <span class="nav-icon">&#9989;</span>
-        <span class="nav-label">Tasks & Pipeline</span>
+        <span class="nav-label">Tasks &amp; Pipeline</span>
       </div>
       <div class="nav-item" data-route="canva" onclick="Router.navigate('canva')" tabindex="0" role="link">
         <span class="nav-icon">&#127912;</span>
-        <span class="nav-label">Canva & Assets</span>
+        <span class="nav-label">Canva &amp; Assets</span>
+      </div>
+      <div class="nav-item" data-route="intake" onclick="Router.navigate('intake')" tabindex="0" role="link">
+        <span class="nav-icon">&#128229;</span>
+        <span class="nav-label">Brief Intake</span>
+      </div>
+      <div class="nav-item" data-route="publishing" onclick="Router.navigate('publishing')" tabindex="0" role="link">
+        <span class="nav-icon">&#128640;</span>
+        <span class="nav-label">Publishing Control</span>
       </div>
     </div>
 
+    <!-- Compliance -->
+    <div class="nav-group">
+      <div class="nav-group-label">Compliance</div>
+      <div class="nav-item" data-route="qa" onclick="Router.navigate('qa')" tabindex="0" role="link">
+        <span class="nav-icon">&#128737;</span>
+        <span class="nav-label">QA &amp; Compliance</span>
+      </div>
+    </div>
+
+    <!-- Analytics -->
     <div class="nav-group">
       <div class="nav-group-label">Analytics</div>
       <div class="nav-item" data-route="performance" onclick="Router.navigate('performance')" tabindex="0" role="link">
@@ -69,6 +89,7 @@
       </div>
     </div>
 
+    <!-- Strategy -->
     <div class="nav-group">
       <div class="nav-group-label">Strategy</div>
       <div class="nav-item" data-route="channel" onclick="Router.navigate('channel')" tabindex="0" role="link">
@@ -81,8 +102,21 @@
       </div>
     </div>
 
-    <div style="margin-top:auto; padding:16px 20px; font-size:10px; color:rgba(255,255,255,0.25);">
-      GlobalAir.com &copy; 2026
+    <!-- Learning -->
+    <div class="nav-group">
+      <div class="nav-group-label">Learning</div>
+      <div class="nav-item" data-route="library" onclick="Router.navigate('library')" tabindex="0" role="link">
+        <span class="nav-icon">&#128218;</span>
+        <span class="nav-label">Post Library</span>
+      </div>
+      <div class="nav-item" data-route="series" onclick="Router.navigate('series')" tabindex="0" role="link">
+        <span class="nav-icon">&#127916;</span>
+        <span class="nav-label">Series &amp; Campaigns</span>
+      </div>
+    </div>
+
+    <div class="sidebar-footer" style="margin-top:auto; padding:16px 20px; font-size:10px; color:rgba(255,255,255,0.25);">
+      GlobalAir.com &copy; 2026 &middot; v2.0.0
     </div>
   </nav>
 
@@ -98,7 +132,7 @@
         <div id="topbar-date-range"></div>
       </div>
       <div class="topbar-right">
-        <div id="topbar-team-avatars"></div>
+        <div id="topbar-user-picker"></div>
         <div id="topbar-quick-links"></div>
       </div>
     </header>
@@ -120,8 +154,14 @@
   <!-- ============================================================
        SCRIPTS — Order matters: dependencies first, pages last
        ============================================================ -->
+
+  <!-- Core (load first) -->
   <script src="js/store.js"></script>
   <script src="js/events.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/validators.js"></script>
+  <script src="js/formulas.js"></script>
   <script src="js/components.js"></script>
   <script src="js/windsor.js"></script>
   <script src="js/seed-data.js"></script>
@@ -131,35 +171,52 @@
   <script src="js/pages/dashboard.js"></script>
   <script src="js/pages/calendar.js"></script>
   <script src="js/pages/tasks.js"></script>
+  <script src="js/pages/canva-assets.js"></script>
+  <script src="js/pages/intake.js"></script>
+  <script src="js/pages/publishing.js"></script>
+  <script src="js/pages/qa.js"></script>
   <script src="js/pages/performance.js"></script>
   <script src="js/pages/competitor.js"></script>
-  <script src="js/pages/canva-assets.js"></script>
-  <script src="js/pages/channel-strategy.js"></script>
   <script src="js/pages/utm-tracker.js"></script>
+  <script src="js/pages/channel-strategy.js"></script>
   <script src="js/pages/ian-authority.js"></script>
+  <script src="js/pages/library.js"></script>
+  <script src="js/pages/series.js"></script>
 
   <script>
     // ---- Boot ----
     (function boot() {
+      Auth.init();
       SeedData.initialize();
       renderTopbar();
       Router.init();
+
+      // Listen for auth changes
+      window.addEventListener('auth:change', () => {
+        renderTopbar();
+        Router.handleRoute(); // Re-render current page with new role
+      });
     })();
 
-    // Keyboard support: Enter on nav items
+    // Keyboard support: Enter/Space on nav items
     document.querySelectorAll('.nav-item[data-route]').forEach(item => {
-      item.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); item.click(); } });
+      item.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          item.click();
+        }
+      });
     });
 
     function renderTopbar() {
       const settings = Store.get('social_settings') || {};
       document.getElementById('topbar-date-range').innerHTML = Components.dateRangePicker(settings.date_range || '30d');
 
-      // Team avatars
-      const team = SeedData.getTeam();
-      document.getElementById('topbar-team-avatars').innerHTML = team.slice(0, 4).map(m =>
-        `<span class="avatar" title="${m.name}" style="background:${m.color}">${m.initials}</span>`
-      ).join('');
+      // User picker (role switcher)
+      const userPickerEl = document.getElementById('topbar-user-picker');
+      if (userPickerEl && typeof Auth !== 'undefined' && Auth.renderUserPicker) {
+        userPickerEl.innerHTML = Auth.renderUserPicker();
+      }
 
       // Quick links
       document.getElementById('topbar-quick-links').innerHTML = `

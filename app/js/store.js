@@ -1,9 +1,149 @@
 /* =====================================================================
-   AvSocialOS — localStorage Store
-   Versioned CRUD with staleness detection and corruption recovery
+   AvSocialOS — API-Backed Cache Store
+   Thin cache layer over api.js with localStorage fallback for settings.
+   v2.0 — March 2026
    ===================================================================== */
 
 const Store = (() => {
+
+  const _cache = {};
+  const DEFAULT_STALE_MS = 5 * 60 * 1000; // 5 minutes
+  const _staleness = {}; // per-entity override in ms
+
+  // ---- Cache helpers ----
+
+  function _cacheKey(entityName, filters) {
+    const suffix = filters ? JSON.stringify(filters) : '_all';
+    return entityName + ':' + suffix;
+  }
+
+  function _isCacheStale(entityName, filters) {
+    const key = _cacheKey(entityName, filters);
+    const entry = _cache[key];
+    if (!entry) return true;
+    const maxAge = _staleness[entityName] || DEFAULT_STALE_MS;
+    return (Date.now() - entry.timestamp) > maxAge;
+  }
+
+  function _setCache(entityName, filters, data) {
+    const key = _cacheKey(entityName, filters);
+    _cache[key] = { data, timestamp: Date.now() };
+  }
+
+  function _getCache(entityName, filters) {
+    const key = _cacheKey(entityName, filters);
+    const entry = _cache[key];
+    return entry ? entry.data : null;
+  }
+
+  // ---- API-backed CRUD ----
+
+  async function getEntity(entityName, filters) {
+    if (!_isCacheStale(entityName, filters)) {
+      return _getCache(entityName, filters);
+    }
+    try {
+      if (typeof API !== 'undefined' && API[entityName] && API[entityName].list) {
+        const data = await API[entityName].list(filters);
+        _setCache(entityName, filters, data);
+        return data;
+      }
+    } catch (e) {
+      console.warn(`Store.getEntity: API fetch failed for "${entityName}"`, e);
+    }
+    // Return stale cache if API fails
+    return _getCache(entityName, filters);
+  }
+
+  async function getEntityById(entityName, id) {
+    const cacheKey = entityName + ':id:' + id;
+    const entry = _cache[cacheKey];
+    if (entry && (Date.now() - entry.timestamp) < (_staleness[entityName] || DEFAULT_STALE_MS)) {
+      return entry.data;
+    }
+    try {
+      if (typeof API !== 'undefined' && API[entityName] && API[entityName].get) {
+        const data = await API[entityName].get(id);
+        _cache[cacheKey] = { data, timestamp: Date.now() };
+        return data;
+      }
+    } catch (e) {
+      console.warn(`Store.getEntityById: API fetch failed for "${entityName}/${id}"`, e);
+    }
+    return entry ? entry.data : null;
+  }
+
+  async function createEntity(entityName, data) {
+    try {
+      if (typeof API !== 'undefined' && API[entityName] && API[entityName].create) {
+        const created = await API[entityName].create(data);
+        invalidateCache(entityName);
+        return created;
+      }
+    } catch (e) {
+      console.error(`Store.createEntity: failed for "${entityName}"`, e);
+      throw e;
+    }
+  }
+
+  async function updateEntity(entityName, id, data) {
+    try {
+      if (typeof API !== 'undefined' && API[entityName] && API[entityName].update) {
+        const updated = await API[entityName].update(id, data);
+        invalidateCache(entityName);
+        return updated;
+      }
+    } catch (e) {
+      console.error(`Store.updateEntity: failed for "${entityName}/${id}"`, e);
+      throw e;
+    }
+  }
+
+  async function deleteEntity(entityName, id) {
+    try {
+      if (typeof API !== 'undefined' && API[entityName] && API[entityName].delete) {
+        await API[entityName].delete(id);
+        invalidateCache(entityName);
+        return true;
+      }
+    } catch (e) {
+      console.error(`Store.deleteEntity: failed for "${entityName}/${id}"`, e);
+      throw e;
+    }
+  }
+
+  // ---- Cache management ----
+
+  function invalidateCache(entityName) {
+    Object.keys(_cache).forEach(key => {
+      if (key.startsWith(entityName + ':')) {
+        delete _cache[key];
+      }
+    });
+  }
+
+  function invalidateAll() {
+    Object.keys(_cache).forEach(key => delete _cache[key]);
+  }
+
+  function getCacheAge(entityName) {
+    // Find the most recent cache entry for this entity
+    let newest = null;
+    Object.keys(_cache).forEach(key => {
+      if (key.startsWith(entityName + ':') && _cache[key]) {
+        if (!newest || _cache[key].timestamp > newest) {
+          newest = _cache[key].timestamp;
+        }
+      }
+    });
+    return newest ? (Date.now() - newest) : null;
+  }
+
+  function setCacheStaleness(entityName, ms) {
+    _staleness[entityName] = ms;
+  }
+
+  // ---- Backward-compatible localStorage for UI settings ----
 
   function get(key) {
     try {
@@ -22,73 +162,11 @@ const Store = (() => {
       return true;
     } catch (e) {
       console.error(`Store.set: write failed for "${key}"`, e);
-      Components && Components.showToast && Components.showToast('Storage limit reached — some data may not have saved.', 'error');
+      if (typeof Components !== 'undefined' && Components.showToast) {
+        Components.showToast('Storage limit reached — some data may not have saved.', 'error');
+      }
       return false;
     }
-  }
-
-  function getVersioned(key) {
-    return get(key);
-  }
-
-  function setVersioned(key, value, updater = 'system') {
-    const existing = get(key) || {};
-    const previous = JSON.parse(JSON.stringify(existing));
-    const updated = {
-      ...existing,
-      ...value,
-      last_updated: new Date().toISOString(),
-      updated_by: updater,
-      _version_history: [
-        ...(existing._version_history || []),
-        {
-          date: new Date().toISOString(),
-          updater,
-          previous_value: previous,
-          new_value: value
-        }
-      ].slice(-50)
-    };
-    return set(key, updated);
-  }
-
-  function appendToArray(key, item) {
-    const arr = get(key) || [];
-    const exists = arr.find(x => x.id === item.id);
-    if (exists) return false;
-    arr.push(item);
-    return set(key, arr);
-  }
-
-  function updateInArray(key, id, updates) {
-    const arr = get(key) || [];
-    const idx = arr.findIndex(x => x.id === id);
-    if (idx === -1) return false;
-    arr[idx] = { ...arr[idx], ...updates };
-    return set(key, arr);
-  }
-
-  function removeFromArray(key, id) {
-    const arr = get(key) || [];
-    const filtered = arr.filter(x => x.id !== id);
-    return set(key, filtered);
-  }
-
-  function isStale(key, thresholdDays) {
-    const data = get(key);
-    if (!data) return true;
-    const lastUpdated = data.last_updated || data.last_upload_date;
-    if (!lastUpdated) return true;
-    const age = (Date.now() - new Date(lastUpdated).getTime()) / (1000 * 60 * 60 * 24);
-    return age > thresholdDays;
-  }
-
-  function getAge(key) {
-    const data = get(key);
-    if (!data) return null;
-    const lastUpdated = data.last_updated || data.last_upload_date;
-    if (!lastUpdated) return null;
-    return (Date.now() - new Date(lastUpdated).getTime()) / (1000 * 60 * 60);
   }
 
   function isInitialized() {
@@ -104,11 +182,14 @@ const Store = (() => {
       k.startsWith('social_') || k.startsWith('avsocial_') || k.startsWith('windsor_')
     );
     keys.forEach(k => localStorage.removeItem(k));
+    invalidateAll();
   }
 
   return {
-    get, set, getVersioned, setVersioned,
-    appendToArray, updateInArray, removeFromArray,
-    isStale, getAge, isInitialized, markInitialized, resetAll
+    // API-backed cache
+    getEntity, getEntityById, createEntity, updateEntity, deleteEntity,
+    invalidateCache, invalidateAll, getCacheAge, setCacheStaleness,
+    // Backward-compatible localStorage (settings/preferences)
+    get, set, isInitialized, markInitialized, resetAll
   };
 })();
