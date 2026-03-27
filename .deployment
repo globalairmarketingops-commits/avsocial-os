@@ -1,3 +1,0 @@
-[config]
-command = echo "Deployment complete — Node.js app ready"
-SCM_DO_BUILD_DURING_DEPLOYMENT = false
