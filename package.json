@@ -1,0 +1,12 @@
+{
+  "name": "avsocial-os",
+  "version": "1.0.0",
+  "description": "Av/SocialOS — GlobalAir.com Social Operations Hub",
+  "private": true,
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "author": "GlobalAir.com",
+  "license": "UNLICENSED"
+}

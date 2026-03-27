@@ -1,0 +1,82 @@
+/* =====================================================================
+   GLOBALAIR.COM DESIGN TOKENS — CSS Custom Properties
+   Source: DevOps Protocol v1.0 (March 20, 2026)
+   Owner: Casey Jones, Head of Marketing & Growth
+
+   RETIRED (build error if used):
+   #0F1340, #63FB00, #1B2A4A, #2E75B6, #293594
+   ===================================================================== */
+
+:root {
+  /* --- Brand Colors --- */
+  --ga-navy:           #102297;
+  --ga-navy-deep:      #0B1870;
+  --ga-navy-light:     #1A2FA8;
+  --ga-navy-mid:       #1E34B8;
+  --ga-green:          #97CB00;
+  --ga-green-hover:    #A8DC10;
+  --ga-green-dark:     #6B9200;
+  --ga-blue:           #4782D3;
+  --ga-blue-hover:     #3A72C2;
+  --ga-blue-light:     #EBF2FC;
+  --ga-blue-subtle:    #F0F5FF;
+
+  /* --- System Colors --- */
+  --ga-red:            #E8503A;
+  --ga-red-light:      rgba(232, 80, 58, 0.06);
+  --ga-amber:          #F59E0B;
+  --ga-amber-light:    rgba(245, 158, 11, 0.08);
+
+  /* --- Platform Colors --- */
+  --platform-linkedin:  #0A66C2;
+  --platform-facebook:  #1877F2;
+  --platform-instagram: #E4405F;
+  --platform-twitter:   #1DA1F2;
+  --platform-youtube:   #FF0000;
+  --platform-tiktok:    #69C9D0;
+
+  /* --- Neutrals --- */
+  --ga-white:          #FFFFFF;
+  --ga-off-white:      #F4F5F7;
+  --ga-muted:          #8A92A8;
+  --ga-muted-light:    #B2BBC8;
+  --ga-charcoal:       #2A2A3A;
+  --ga-border:         #E2E6EF;
+  --ga-border-light:   #F0F1F5;
+  --ga-overlay:        rgba(16, 34, 151, 0.2);
+
+  /* --- Typography --- */
+  --ga-font-display:   'Montserrat', sans-serif;
+  --ga-font-body:      'DM Sans', sans-serif;
+  --ga-font-mono:      'SF Mono', 'Fira Code', 'Consolas', monospace;
+
+  /* --- Spacing --- */
+  --ga-section-pad:    80px;
+  --ga-section-pad-sm: 48px;
+  --ga-content-max:    1200px;
+  --ga-gap:            14px;
+  --ga-gap-tight:      10px;
+  --ga-gap-wide:       20px;
+
+  /* --- Border Radius --- */
+  --ga-radius:         6px;
+  --ga-radius-lg:      10px;
+  --ga-radius-pill:    20px;
+  --ga-radius-round:   50%;
+
+  /* --- Shadows --- */
+  --ga-shadow-xs:      0 1px 2px rgba(16, 34, 151, 0.04);
+  --ga-shadow-sm:      0 1px 3px rgba(16, 34, 151, 0.06), 0 1px 2px rgba(16, 34, 151, 0.04);
+  --ga-shadow-md:      0 4px 16px rgba(16, 34, 151, 0.1);
+  --ga-shadow-lg:      0 8px 24px rgba(16, 34, 151, 0.12);
+  --ga-shadow-xl:      0 16px 48px rgba(16, 34, 151, 0.16);
+
+  /* --- Transitions --- */
+  --ga-transition:     all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  --ga-transition-slow: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* --- Layout --- */
+  --sidebar-w:         260px;
+  --sidebar-w-collapsed: 64px;
+  --topbar-h:          60px;
+}

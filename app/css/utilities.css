@@ -1,0 +1,570 @@
+/* =====================================================================
+   GLOBALAIR.COM DESIGN SYSTEM — Utility Classes
+   Source: DevOps Protocol v1.0 (March 20, 2026)
+   Owner: Casey Jones, Head of Marketing & Growth
+
+   Requires: globalair-tokens.css (import first)
+   Usage: Class-based utilities for rapid UI assembly.
+   Naming: .ga-[property]-[value]
+   ===================================================================== */
+
+/* =================================================================
+   1. COLORS — Background
+   ================================================================= */
+.ga-bg-navy        { background-color: var(--ga-navy); }
+.ga-bg-navy-deep   { background-color: var(--ga-navy-deep); }
+.ga-bg-navy-light  { background-color: var(--ga-navy-light); }
+.ga-bg-navy-mid    { background-color: var(--ga-navy-mid); }
+.ga-bg-green       { background-color: var(--ga-green); }
+.ga-bg-green-dark  { background-color: var(--ga-green-dark); }
+.ga-bg-blue        { background-color: var(--ga-blue); }
+.ga-bg-blue-light  { background-color: var(--ga-blue-light); }
+.ga-bg-blue-subtle { background-color: var(--ga-blue-subtle); }
+.ga-bg-red         { background-color: var(--ga-red); }
+.ga-bg-red-light   { background-color: var(--ga-red-light); }
+.ga-bg-amber       { background-color: var(--ga-amber); }
+.ga-bg-amber-light { background-color: var(--ga-amber-light); }
+.ga-bg-white       { background-color: var(--ga-white); }
+.ga-bg-off-white   { background-color: var(--ga-off-white); }
+.ga-bg-charcoal    { background-color: var(--ga-charcoal); }
+
+/* =================================================================
+   2. COLORS — Text
+   ================================================================= */
+.ga-text-navy      { color: var(--ga-navy); }
+.ga-text-navy-deep { color: var(--ga-navy-deep); }
+.ga-text-green     { color: var(--ga-green); }
+.ga-text-green-dark{ color: var(--ga-green-dark); }
+.ga-text-blue      { color: var(--ga-blue); }
+.ga-text-red       { color: var(--ga-red); }
+.ga-text-amber     { color: var(--ga-amber); }
+.ga-text-white     { color: var(--ga-white); }
+.ga-text-charcoal  { color: var(--ga-charcoal); }
+.ga-text-muted     { color: var(--ga-muted); }
+.ga-text-muted-light { color: var(--ga-muted-light); }
+
+/* =================================================================
+   3. TYPOGRAPHY — Font Family
+   ================================================================= */
+.ga-font-display   { font-family: var(--ga-font-display); }
+.ga-font-body      { font-family: var(--ga-font-body); }
+.ga-font-mono      { font-family: var(--ga-font-mono); }
+
+/* =================================================================
+   4. TYPOGRAPHY — Size Scale
+   ================================================================= */
+.ga-text-xs        { font-size: 0.75rem; line-height: 1rem; }       /* 12px */
+.ga-text-sm        { font-size: 0.8125rem; line-height: 1.25rem; }  /* 13px */
+.ga-text-base      { font-size: 0.875rem; line-height: 1.375rem; }  /* 14px */
+.ga-text-md        { font-size: 1rem; line-height: 1.5rem; }        /* 16px */
+.ga-text-lg        { font-size: 1.125rem; line-height: 1.75rem; }   /* 18px */
+.ga-text-xl        { font-size: 1.25rem; line-height: 1.75rem; }    /* 20px */
+.ga-text-2xl       { font-size: 1.5rem; line-height: 2rem; }        /* 24px */
+.ga-text-3xl       { font-size: 1.875rem; line-height: 2.25rem; }   /* 30px */
+.ga-text-4xl       { font-size: 2.25rem; line-height: 2.5rem; }     /* 36px */
+
+/* =================================================================
+   5. TYPOGRAPHY — Weight
+   ================================================================= */
+.ga-font-normal    { font-weight: 400; }
+.ga-font-medium    { font-weight: 500; }
+.ga-font-semibold  { font-weight: 600; }
+.ga-font-bold      { font-weight: 700; }
+
+/* =================================================================
+   6. TYPOGRAPHY — Alignment & Transform
+   ================================================================= */
+.ga-text-left      { text-align: left; }
+.ga-text-center    { text-align: center; }
+.ga-text-right     { text-align: right; }
+.ga-uppercase      { text-transform: uppercase; }
+.ga-lowercase      { text-transform: lowercase; }
+.ga-capitalize     { text-transform: capitalize; }
+.ga-tracking-wide  { letter-spacing: 0.05em; }
+.ga-tracking-wider { letter-spacing: 0.08em; }
+.ga-truncate       { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+/* =================================================================
+   7. SPACING — Padding
+   ================================================================= */
+.ga-p-0   { padding: 0; }
+.ga-p-1   { padding: 4px; }
+.ga-p-2   { padding: 8px; }
+.ga-p-3   { padding: 12px; }
+.ga-p-4   { padding: 16px; }
+.ga-p-5   { padding: 20px; }
+.ga-p-6   { padding: 24px; }
+.ga-p-8   { padding: 32px; }
+.ga-p-10  { padding: 40px; }
+.ga-p-12  { padding: 48px; }
+.ga-p-16  { padding: 64px; }
+.ga-p-20  { padding: 80px; }
+
+.ga-px-0  { padding-left: 0; padding-right: 0; }
+.ga-px-2  { padding-left: 8px; padding-right: 8px; }
+.ga-px-3  { padding-left: 12px; padding-right: 12px; }
+.ga-px-4  { padding-left: 16px; padding-right: 16px; }
+.ga-px-5  { padding-left: 20px; padding-right: 20px; }
+.ga-px-6  { padding-left: 24px; padding-right: 24px; }
+.ga-px-8  { padding-left: 32px; padding-right: 32px; }
+
+.ga-py-0  { padding-top: 0; padding-bottom: 0; }
+.ga-py-2  { padding-top: 8px; padding-bottom: 8px; }
+.ga-py-3  { padding-top: 12px; padding-bottom: 12px; }
+.ga-py-4  { padding-top: 16px; padding-bottom: 16px; }
+.ga-py-5  { padding-top: 20px; padding-bottom: 20px; }
+.ga-py-6  { padding-top: 24px; padding-bottom: 24px; }
+.ga-py-8  { padding-top: 32px; padding-bottom: 32px; }
+
+/* =================================================================
+   8. SPACING — Margin
+   ================================================================= */
+.ga-m-0   { margin: 0; }
+.ga-m-1   { margin: 4px; }
+.ga-m-2   { margin: 8px; }
+.ga-m-3   { margin: 12px; }
+.ga-m-4   { margin: 16px; }
+.ga-m-auto { margin: auto; }
+
+.ga-mx-auto { margin-left: auto; margin-right: auto; }
+.ga-ml-auto { margin-left: auto; }
+.ga-mr-auto { margin-right: auto; }
+
+.ga-mt-0  { margin-top: 0; }
+.ga-mt-1  { margin-top: 4px; }
+.ga-mt-2  { margin-top: 8px; }
+.ga-mt-3  { margin-top: 12px; }
+.ga-mt-4  { margin-top: 16px; }
+.ga-mt-6  { margin-top: 24px; }
+.ga-mt-8  { margin-top: 32px; }
+
+.ga-mb-0  { margin-bottom: 0; }
+.ga-mb-1  { margin-bottom: 4px; }
+.ga-mb-2  { margin-bottom: 8px; }
+.ga-mb-3  { margin-bottom: 12px; }
+.ga-mb-4  { margin-bottom: 16px; }
+.ga-mb-6  { margin-bottom: 24px; }
+.ga-mb-8  { margin-bottom: 32px; }
+
+/* =================================================================
+   9. SPACING — Gap (for flex/grid containers)
+   ================================================================= */
+.ga-gap-tight { gap: var(--ga-gap-tight); }
+.ga-gap       { gap: var(--ga-gap); }
+.ga-gap-wide  { gap: var(--ga-gap-wide); }
+.ga-gap-0     { gap: 0; }
+.ga-gap-1     { gap: 4px; }
+.ga-gap-2     { gap: 8px; }
+.ga-gap-3     { gap: 12px; }
+.ga-gap-4     { gap: 16px; }
+.ga-gap-6     { gap: 24px; }
+.ga-gap-8     { gap: 32px; }
+
+/* =================================================================
+   10. LAYOUT — Display
+   ================================================================= */
+.ga-block        { display: block; }
+.ga-inline       { display: inline; }
+.ga-inline-block { display: inline-block; }
+.ga-flex         { display: flex; }
+.ga-inline-flex  { display: inline-flex; }
+.ga-grid         { display: grid; }
+.ga-hidden       { display: none; }
+
+/* =================================================================
+   11. LAYOUT — Flexbox
+   ================================================================= */
+.ga-flex-row     { flex-direction: row; }
+.ga-flex-col     { flex-direction: column; }
+.ga-flex-wrap    { flex-wrap: wrap; }
+.ga-flex-nowrap  { flex-wrap: nowrap; }
+.ga-flex-1       { flex: 1 1 0%; }
+.ga-flex-auto    { flex: 1 1 auto; }
+.ga-flex-none    { flex: none; }
+.ga-shrink-0     { flex-shrink: 0; }
+.ga-grow-0       { flex-grow: 0; }
+
+.ga-items-start   { align-items: flex-start; }
+.ga-items-center  { align-items: center; }
+.ga-items-end     { align-items: flex-end; }
+.ga-items-stretch { align-items: stretch; }
+
+.ga-justify-start   { justify-content: flex-start; }
+.ga-justify-center  { justify-content: center; }
+.ga-justify-end     { justify-content: flex-end; }
+.ga-justify-between { justify-content: space-between; }
+.ga-justify-around  { justify-content: space-around; }
+
+/* =================================================================
+   12. LAYOUT — Grid
+   ================================================================= */
+.ga-grid-cols-1  { grid-template-columns: repeat(1, 1fr); }
+.ga-grid-cols-2  { grid-template-columns: repeat(2, 1fr); }
+.ga-grid-cols-3  { grid-template-columns: repeat(3, 1fr); }
+.ga-grid-cols-4  { grid-template-columns: repeat(4, 1fr); }
+.ga-grid-cols-6  { grid-template-columns: repeat(6, 1fr); }
+.ga-grid-cols-12 { grid-template-columns: repeat(12, 1fr); }
+.ga-col-span-2   { grid-column: span 2; }
+.ga-col-span-3   { grid-column: span 3; }
+.ga-col-span-4   { grid-column: span 4; }
+.ga-col-span-6   { grid-column: span 6; }
+.ga-col-span-full { grid-column: 1 / -1; }
+
+/* =================================================================
+   13. SIZING
+   ================================================================= */
+.ga-w-full    { width: 100%; }
+.ga-w-auto    { width: auto; }
+.ga-w-screen  { width: 100vw; }
+.ga-max-w-content { max-width: var(--ga-content-max); }
+.ga-max-w-sm  { max-width: 640px; }
+.ga-max-w-md  { max-width: 768px; }
+.ga-max-w-lg  { max-width: 1024px; }
+.ga-max-w-xl  { max-width: 1280px; }
+.ga-h-full    { height: 100%; }
+.ga-h-screen  { height: 100vh; }
+.ga-min-h-screen { min-height: 100vh; }
+
+/* =================================================================
+   14. BORDERS
+   ================================================================= */
+.ga-border          { border: 1px solid var(--ga-border); }
+.ga-border-light    { border: 1px solid var(--ga-border-light); }
+.ga-border-navy     { border: 1px solid var(--ga-navy); }
+.ga-border-green    { border: 1px solid var(--ga-green); }
+.ga-border-blue     { border: 1px solid var(--ga-blue); }
+.ga-border-red      { border: 1px solid var(--ga-red); }
+.ga-border-0        { border: none; }
+.ga-border-t        { border-top: 1px solid var(--ga-border); }
+.ga-border-b        { border-bottom: 1px solid var(--ga-border); }
+.ga-border-l        { border-left: 1px solid var(--ga-border); }
+.ga-border-r        { border-right: 1px solid var(--ga-border); }
+
+/* =================================================================
+   15. BORDER RADIUS
+   ================================================================= */
+.ga-rounded      { border-radius: var(--ga-radius); }
+.ga-rounded-lg   { border-radius: var(--ga-radius-lg); }
+.ga-rounded-pill { border-radius: var(--ga-radius-pill); }
+.ga-rounded-full { border-radius: var(--ga-radius-round); }
+.ga-rounded-none { border-radius: 0; }
+
+/* =================================================================
+   16. SHADOWS
+   ================================================================= */
+.ga-shadow-none { box-shadow: none; }
+.ga-shadow-xs   { box-shadow: var(--ga-shadow-xs); }
+.ga-shadow-sm   { box-shadow: var(--ga-shadow-sm); }
+.ga-shadow      { box-shadow: var(--ga-shadow-md); }
+.ga-shadow-lg   { box-shadow: var(--ga-shadow-lg); }
+.ga-shadow-xl   { box-shadow: var(--ga-shadow-xl); }
+
+/* =================================================================
+   17. TRANSITIONS
+   ================================================================= */
+.ga-transition      { transition: var(--ga-transition); }
+.ga-transition-slow { transition: var(--ga-transition-slow); }
+.ga-transition-none { transition: none; }
+
+/* =================================================================
+   18. POSITIONING
+   ================================================================= */
+.ga-relative { position: relative; }
+.ga-absolute { position: absolute; }
+.ga-fixed    { position: fixed; }
+.ga-sticky   { position: sticky; }
+.ga-inset-0  { top: 0; right: 0; bottom: 0; left: 0; }
+.ga-top-0    { top: 0; }
+.ga-right-0  { right: 0; }
+.ga-bottom-0 { bottom: 0; }
+.ga-left-0   { left: 0; }
+
+/* =================================================================
+   19. OVERFLOW
+   ================================================================= */
+.ga-overflow-hidden  { overflow: hidden; }
+.ga-overflow-auto    { overflow: auto; }
+.ga-overflow-scroll  { overflow: scroll; }
+.ga-overflow-visible { overflow: visible; }
+.ga-overflow-x-auto  { overflow-x: auto; }
+.ga-overflow-y-auto  { overflow-y: auto; }
+
+/* =================================================================
+   20. Z-INDEX
+   ================================================================= */
+.ga-z-0    { z-index: 0; }
+.ga-z-10   { z-index: 10; }
+.ga-z-20   { z-index: 20; }
+.ga-z-30   { z-index: 30; }
+.ga-z-40   { z-index: 40; }
+.ga-z-50   { z-index: 50; }
+.ga-z-max  { z-index: 9999; }
+
+/* =================================================================
+   21. OPACITY
+   ================================================================= */
+.ga-opacity-0   { opacity: 0; }
+.ga-opacity-25  { opacity: 0.25; }
+.ga-opacity-50  { opacity: 0.5; }
+.ga-opacity-75  { opacity: 0.75; }
+.ga-opacity-100 { opacity: 1; }
+
+/* =================================================================
+   22. CURSOR
+   ================================================================= */
+.ga-cursor-pointer  { cursor: pointer; }
+.ga-cursor-default  { cursor: default; }
+.ga-cursor-not-allowed { cursor: not-allowed; }
+
+/* =================================================================
+   23. ACCESSIBILITY — Screen Reader Only
+   ================================================================= */
+.ga-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* =================================================================
+   24. COMPOSITE PATTERNS — Common Combinations
+   ================================================================= */
+
+/* Card container */
+.ga-card {
+  background: var(--ga-white);
+  border: 1px solid var(--ga-border);
+  border-radius: var(--ga-radius-lg);
+  box-shadow: var(--ga-shadow-sm);
+  padding: 24px;
+}
+
+/* Sidebar layout */
+.ga-sidebar {
+  background: var(--ga-navy);
+  color: var(--ga-white);
+  width: var(--sidebar-w);
+  min-height: 100vh;
+}
+
+/* Content area */
+.ga-content {
+  background: var(--ga-white);
+  flex: 1;
+  padding: var(--ga-section-pad-sm);
+  max-width: var(--ga-content-max);
+}
+
+/* Section padding */
+.ga-section {
+  padding: var(--ga-section-pad) 0;
+}
+.ga-section-sm {
+  padding: var(--ga-section-pad-sm) 0;
+}
+
+/* Badge / pill */
+.ga-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 10px;
+  border-radius: var(--ga-radius-pill);
+  font-family: var(--ga-font-body);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+.ga-badge-green {
+  background: var(--ga-green);
+  color: var(--ga-navy);
+}
+.ga-badge-blue {
+  background: var(--ga-blue-light);
+  color: var(--ga-navy);
+}
+.ga-badge-red {
+  background: var(--ga-red-light);
+  color: var(--ga-red);
+}
+.ga-badge-amber {
+  background: var(--ga-amber-light);
+  color: var(--ga-charcoal);
+}
+
+/* Stat card */
+.ga-stat {
+  background: var(--ga-white);
+  border: 1px solid var(--ga-border);
+  border-radius: var(--ga-radius-lg);
+  padding: 20px 24px;
+}
+.ga-stat-value {
+  font-family: var(--ga-font-display);
+  font-size: 1.875rem;
+  font-weight: 700;
+  color: var(--ga-navy);
+  line-height: 1.2;
+}
+.ga-stat-label {
+  font-family: var(--ga-font-body);
+  font-size: 0.8125rem;
+  color: var(--ga-muted);
+  margin-top: 4px;
+}
+
+/* Table */
+.ga-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--ga-font-body);
+  font-size: 0.875rem;
+}
+.ga-table th {
+  text-align: left;
+  padding: 10px 14px;
+  font-weight: 600;
+  color: var(--ga-navy);
+  border-bottom: 2px solid var(--ga-border);
+  background: var(--ga-off-white);
+}
+.ga-table td {
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--ga-border-light);
+  color: var(--ga-charcoal);
+}
+.ga-table tr:hover td {
+  background: var(--ga-blue-subtle);
+}
+
+/* =================================================================
+   25. AVOS LOGO COMPONENT
+   Source: AvOS_Logo_System_Option3.html (confirmed design)
+   Construction: Av (green 400) + / (muted 300) + [CORE] (white/navy 900) + OS (blue 400)
+   Font: Montserrat across all elements
+   ================================================================= */
+
+/* Base component */
+.avos {
+  font-family: var(--ga-font-display);
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0;
+  line-height: 1;
+}
+.avos-av {
+  font-weight: 400;
+  color: var(--ga-green);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+.avos-slash {
+  color: rgba(255, 255, 255, 0.18);
+  font-weight: 300;
+  margin: 0 0.12em;
+}
+.avos-core {
+  font-weight: 900;
+  color: var(--ga-white);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+.avos-os {
+  font-weight: 400;
+  color: var(--ga-blue);
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  align-self: flex-end;
+  margin-left: 0.12em;
+}
+
+/* Size scale — OS suffix optically sized per scale */
+.avos-xl         { font-size: 56px; }
+.avos-xl .avos-os { font-size: 20px; margin-bottom: 7px; }
+.avos-lg         { font-size: 42px; }
+.avos-lg .avos-os { font-size: 15px; margin-bottom: 5px; }
+.avos-md         { font-size: 28px; }
+.avos-md .avos-os { font-size: 11px; margin-bottom: 4px; }
+.avos-sm         { font-size: 20px; }
+.avos-sm .avos-os { font-size: 8px;  margin-bottom: 3px; }
+.avos-xs         { font-size: 14px; }
+.avos-xs .avos-os { font-size: 6px;  margin-bottom: 2px; }
+
+/* Light variant — for off-white / white backgrounds */
+.avos-light .avos-av    { color: var(--ga-green); }
+.avos-light .avos-slash { color: rgba(16, 34, 151, 0.2); }
+.avos-light .avos-core  { color: var(--ga-navy); }
+.avos-light .avos-os    { color: var(--ga-blue); }
+
+/* On-green variant — for green background surfaces */
+.avos-on-green .avos-av    { color: var(--ga-navy); }
+.avos-on-green .avos-slash { color: rgba(16, 34, 151, 0.25); }
+.avos-on-green .avos-core  { color: var(--ga-navy); }
+.avos-on-green .avos-os    { color: var(--ga-navy); opacity: 0.5; }
+
+/* Badge / pill variant — for dashboard tabs, filter chips */
+.avos-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(71, 130, 211, 0.1);
+  border: 1px solid rgba(71, 130, 211, 0.25);
+  border-radius: 100px;
+  padding: 6px 14px 6px 10px;
+}
+.avos-badge-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--ga-green);
+}
+
+/* =================================================================
+   26. BACKWARD-COMPATIBLE ALIASES — Legacy SocialOS classes
+   These map old unprefixed classes to design system values.
+   Pages using these will continue to work without modification.
+   ================================================================= */
+.text-navy { color: var(--ga-navy); }
+.text-green { color: var(--ga-green-dark); }
+.text-blue { color: var(--ga-blue); }
+.text-red { color: var(--ga-red); }
+.text-amber { color: var(--ga-amber); }
+.text-muted { color: var(--ga-muted); }
+.text-white { color: var(--ga-white); }
+.text-sm { font-size: 12px; }
+.text-xs { font-size: 10px; }
+.text-mono { font-family: var(--ga-font-mono); }
+.text-center { text-align: center; }
+.text-right { text-align: right; }
+.text-upper { text-transform: uppercase; letter-spacing: 0.05em; }
+.font-display { font-family: var(--ga-font-display); }
+.font-bold { font-weight: 700; }
+.font-semi { font-weight: 600; }
+.bg-white { background: var(--ga-white); }
+.bg-off-white { background: var(--ga-off-white); }
+.bg-navy { background: var(--ga-navy); }
+.bg-blue-light { background: var(--ga-blue-light); }
+.mt-0 { margin-top: 0; }
+.mt-1 { margin-top: 8px; }
+.mt-2 { margin-top: 16px; }
+.mt-3 { margin-top: 24px; }
+.mb-0 { margin-bottom: 0; }
+.mb-1 { margin-bottom: 8px; }
+.mb-2 { margin-bottom: 16px; }
+.mb-3 { margin-bottom: 24px; }
+.p-1 { padding: 8px; }
+.p-2 { padding: 16px; }
+.p-3 { padding: 24px; }
+.gap-1 { gap: 8px; }
+.gap-2 { gap: 16px; }
+.flex { display: flex; }
+.flex-col { flex-direction: column; }
+.flex-wrap { flex-wrap: wrap; }
+.items-center { align-items: center; }
+.justify-between { justify-content: space-between; }
+.flex-1 { flex: 1; }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
