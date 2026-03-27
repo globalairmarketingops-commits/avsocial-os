@@ -17,7 +17,15 @@ const crypto = require('crypto');
 
 const PORT = process.env.PORT || 8093;
 const APP_DIR = path.join(__dirname, 'app');
-const DATA_DIR = path.join(__dirname, 'data');
+
+// Azure App Service: persistent storage at /home/data/avsocialos
+// Local dev: use ./data relative to project root
+const DATA_DIR = process.env.DATA_DIR || (
+  process.env.WEBSITE_SITE_NAME
+    ? '/home/data/avsocialos'
+    : path.join(__dirname, 'data')
+);
+const SEED_DIR = path.join(__dirname, 'data');
 
 const ENTITIES = [
   'posts', 'tasks', 'briefs', 'publish_status', 'rule_violations',
@@ -82,7 +90,14 @@ function ensureDataDir() {
   for (const entity of ENTITIES) {
     const filePath = path.join(DATA_DIR, `${entity}.json`);
     if (!fs.existsSync(filePath)) {
-      fs.writeFileSync(filePath, '[]', 'utf8');
+      // On first deploy: copy seed data from bundled data/ if available
+      const seedPath = path.join(SEED_DIR, `${entity}.json`);
+      if (SEED_DIR !== DATA_DIR && fs.existsSync(seedPath)) {
+        fs.copyFileSync(seedPath, filePath);
+        console.log(`  [INIT] Seeded ${entity}.json from deployment bundle`);
+      } else {
+        fs.writeFileSync(filePath, '[]', 'utf8');
+      }
     }
   }
 }
@@ -721,13 +736,20 @@ const server = http.createServer(async (req, res) => {
 ensureDataDir();
 
 server.listen(PORT, () => {
+  const isAzure = !!process.env.WEBSITE_SITE_NAME;
   console.log('');
   console.log('  Av/SocialOS v2.0.0');
   console.log('  ──────────────────────────────');
-  console.log(`  Local:     http://localhost:${PORT}`);
-  console.log(`  API:       http://localhost:${PORT}/api`);
-  console.log(`  Health:    http://localhost:${PORT}/api/health`);
-  console.log(`  Formulas:  http://localhost:${PORT}/api/formulas`);
+  if (isAzure) {
+    console.log(`  Azure:     ${process.env.WEBSITE_SITE_NAME}`);
+    console.log(`  Port:      ${PORT}`);
+  } else {
+    console.log(`  Local:     http://localhost:${PORT}`);
+  }
+  console.log(`  API:       /api`);
+  console.log(`  Health:    /api/health`);
+  console.log(`  Formulas:  /api/formulas`);
+  console.log(`  Data Dir:  ${DATA_DIR}`);
   console.log(`  Entities:  ${ENTITIES.length} data stores`);
   console.log('  ──────────────────────────────');
   console.log('');

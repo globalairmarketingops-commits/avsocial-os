@@ -1,0 +1,73 @@
+# AvSocialOS — Azure App Service Deployment
+# Triggers on push to main branch
+# Deploys to Azure App Service (Linux, Node.js 20)
+
+name: Deploy to Azure App Service
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+env:
+  AZURE_WEBAPP_NAME: avsocialos
+  AZURE_WEBAPP_PACKAGE_PATH: '.'
+  NODE_VERSION: '20.x'
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
+      - name: Install dependencies
+        run: npm ci --omit=dev 2>/dev/null || npm install --omit=dev 2>/dev/null || echo "No dependencies to install"
+
+      - name: Verify server starts
+        run: |
+          timeout 5 node server.js &
+          sleep 2
+          curl -f http://localhost:8093/api/health || exit 1
+          kill %1 2>/dev/null || true
+
+      - name: Upload artifact for deployment
+        uses: actions/upload-artifact@v4
+        with:
+          name: avsocialos-app
+          path: |
+            server.js
+            package.json
+            web.config
+            app/
+            data/
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+    environment:
+      name: production
+      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
+
+    steps:
+      - name: Download artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: avsocialos-app
+
+      - name: Deploy to Azure Web App
+        id: deploy-to-webapp
+        uses: azure/webapps-deploy@v3
+        with:
+          app-name: ${{ env.AZURE_WEBAPP_NAME }}
+          publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
+          package: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
