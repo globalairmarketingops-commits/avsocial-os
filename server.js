@@ -735,7 +735,7 @@ const server = http.createServer(async (req, res) => {
 
 ensureDataDir();
 
-server.listen(PORT, () => {
+server.listen(PORT, '0.0.0.0', () => {
   const isAzure = !!process.env.WEBSITE_SITE_NAME;
   console.log('');
   console.log('  Av/SocialOS v2.0.0');
@@ -753,4 +753,14 @@ server.listen(PORT, () => {
   console.log(`  Entities:  ${ENTITIES.length} data stores`);
   console.log('  ──────────────────────────────');
   console.log('');
+});
+
+server.on('error', (err) => {
+  console.error('[FATAL] Server failed to start:', err.message);
+  process.exit(1);
+});
+
+process.on('uncaughtException', (err) => {
+  console.error('[FATAL] Uncaught exception:', err.message, err.stack);
+  process.exit(1);
 });
